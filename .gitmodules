@@ -1,0 +1,3 @@
+[submodule "minai_mod1"]
+	path = minai_mod1
+	url = git@github.com:carpdiem/minai_mod1.git
