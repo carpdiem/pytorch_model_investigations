@@ -6,6 +6,7 @@ import datasets as ds
 import torchvision.transforms.functional as TF
 import minai as mi
 from torch.utils.data import DataLoader
+import torch.profiler as tp
 
 def setup_mnist_datasets():
     mnist = ds.load_dataset("mnist")
@@ -41,10 +42,11 @@ class SimpleNet(nn.Module):
         x = self.layer1(x)
         return x
 
-def training_loop(train_dl, validation_dl, model, loss_fn, optimizer, device='cpu', verbose=False):
+def training_loop(train_dl, validation_dl, model, loss_fn, optimizer, device='cpu', verbose=False, single_batch=False):
     size = len(train_dl.dataset)
     model.train()
-    for batch, d in enumerate(train_dl):
+    
+    def train_batch(d):
         X = d['image'].view(-1, 28*28)
         y = d['label']
         X, y = X.to(device), y.to(device)
@@ -55,18 +57,28 @@ def training_loop(train_dl, validation_dl, model, loss_fn, optimizer, device='cp
 
         loss.backward()
         optimizer.step()
+        
+        return loss
 
-        if batch % 100 == 0:
-            if verbose:
-                for name, param in model.named_parameters():
-                    if param.requires_grad:
-                        grad_mean = torch.mean(param.grad)
-                        grad_var = torch.var(param.grad)
-                        grad_min = torch.min(param.grad)
-                        grad_max = torch.max(param.grad)
-                        print(f"param: {name} mean: {grad_mean} var: {grad_var} min: {grad_min} max: {grad_max}")
-            loss, current = loss.item(), (batch + 1) * len(X)
-            print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
+    if single_batch:
+        d = next(iter(train_dl))
+        loss = train_batch(d)
+        return loss
+    else:
+        for batch, d in enumerate(train_dl):
+            loss = train_batch(d)
+
+            if batch % 100 == 0:
+                if verbose:
+                    for name, param in model.named_parameters():
+                        if param.requires_grad:
+                            grad_mean = torch.mean(param.grad)
+                            grad_var = torch.var(param.grad)
+                            grad_min = torch.min(param.grad)
+                            grad_max = torch.max(param.grad)
+                            print(f"param: {name} mean: {grad_mean} var: {grad_var} min: {grad_min} max: {grad_max}")
+                loss, current = loss.item(), (batch + 1) * len(X)
+                print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
 
 def test(dataloader, model, loss_fn, device='cpu'):
     size = len(dataloader.dataset)
@@ -85,16 +97,38 @@ def test(dataloader, model, loss_fn, device='cpu'):
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
-def train_and_test(model, train_dl, valid_dl, test_dl, loss_fn=nn.CrossEntropyLoss(), optimizer=torch.optim.SGD, device='cpu', epochs=5, verbose=False):
+def train_and_test(train_dl, validation_dl, test_dl, model, loss_fn=nn.CrossEntropyLoss(), optimizer=torch.optim.SGD, device='cpu', epochs=5, verbose=False):
     optimizer = optimizer(model.parameters(), lr=1e-3)
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
-        training_loop(train_dl, valid_dl, model, loss_fn, optimizer, device, verbose)
+        training_loop(train_dl, validation_dl, model, loss_fn, optimizer, device, verbose)
         print("Performance on validation set:")
-        test(valid_dl, model, loss_fn, device)
+        test(validation_dl, model, loss_fn, device)
     print("Done!")
     print("Performance on test set:")
     test(test_dl, model, loss_fn, device)
 
 def count_params(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def profile_training_batch(train_dl, validation_dl, model, 
+                           loss_fn=nn.CrossEntropyLoss(), 
+                           optimizer=torch.optim.SGD, 
+                           device='cpu', 
+                           verbose=False):
+    optimizer = optimizer(model.parameters(), lr=1e-3)
+    with tp.profile(activities=[tp.ProfilerActivity.CPU], record_shapes=True, with_flops=True) as profile:
+        with tp.record_function("training_loop"):
+            training_loop(train_dl, validation_dl, model, loss_fn, optimizer, device, verbose, single_batch=True)
+    
+    return profile
+
+def try_me():
+    mnist_dls = setup_mnist_dataloaders()
+    model = SimpleNet()
+    profile = profile_training_batch(mnist_dls['train'], mnist_dls['valid'], model)
+    print("FIRST SECTION")
+    print(profile.key_averages().table(sort_by="cpu_time_total", row_limit=10))
+    print("\n\nSECOND SECTION")
+    print(profile.key_averages(group_by_input_shape=True).table(sort_by="cpu_time_total", row_limit=10))
+    return (mnist_dls, model, profile)
