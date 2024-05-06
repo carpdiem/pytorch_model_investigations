@@ -294,10 +294,13 @@ def plot_multiple_accuracies(results, titles, show = False, path = None):
     if path:
         plt.savefig(path)
 
-def try_me(epochs = 3):
+def try_me(epochs = 3, plot=True):
     res = {'SimpleNet': loss_vs_flops(SimpleNet(), epochs = epochs),
            'SimpleNet2': loss_vs_flops(SimpleNet2(), epochs = epochs),
            'SimpleNet3': loss_vs_flops(SimpleNet3(), epochs = epochs)}
     
-    plot_multiple_accuracies([res['SimpleNet'], res['SimpleNet2'], res['SimpleNet3']],
-                             ['SimpleNet', 'SimpleNet2', 'SimpleNet3'], show = True)
+    if plot:
+        plot_multiple_accuracies([res['SimpleNet'], res['SimpleNet2'], res['SimpleNet3']],
+                                 ['SimpleNet', 'SimpleNet2', 'SimpleNet3'], show = True)
+        
+    return res
