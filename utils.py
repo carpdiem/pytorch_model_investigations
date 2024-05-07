@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 import torch.profiler as tp
 import random
 import matplotlib.pyplot as plt
+import csv
 
 def setup_mnist_datasets():
     mnist = ds.load_dataset("mnist")
@@ -247,6 +248,22 @@ def loss_vs_flops(model, batch_size = 100,
             'losses': np.array(losses),
             'accuracies': np.array(accuracies),
             'model': model}
+
+def write_results_to_csv(res, path):
+    flops = res['flops']
+    losses = res['losses']
+    accuracies = res['accuracies']
+
+    if len(flops) != len(losses) or len(flops) != len(accuracies):
+        raise ValueError("Lengths of flops, losses, and accuracies must be the same")
+    
+    with open(path, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['FLOPs', 'Loss', 'Accuracy'])
+        for i in range(len(flops)):
+            writer.writerow([flops[i], losses[i], accuracies[i]])
+
+    return path
 
 def plot_results(results, title = None, show = False, path = None):
     fig, ax1 = plt.subplots()
