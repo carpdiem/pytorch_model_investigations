@@ -1,1 +1,1 @@
-Completed training for m_LeNet5Predicted duration was: 54.286824464797974 secondsActual Duration was: 36.326571464538574 secondsNumber of Epochs run: 5
+Completed training for m_LeNet5Predicted duration was: 14399.788798570633 secondsActual Duration was: 7117.63397526741 secondsNumber of Epochs run: 1007
