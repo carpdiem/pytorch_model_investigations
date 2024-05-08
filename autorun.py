@@ -145,7 +145,7 @@ def main(time_allotted_seconds = 4 * 60 * 60):
         sys.exit(1)
 
 if __name__ == "__main__":
-    if sys.argv[1]:
+    if len(sys.argv) > 1:
         main(time_allotted_seconds=int(sys.argv[1]))
     else:
         main()
