@@ -4,7 +4,6 @@ import numpy as np
 import torch.nn.functional as F
 import datasets as ds
 import torchvision.transforms.functional as TF
-import minai as mi
 from torch.utils.data import DataLoader
 import torch.profiler as tp
 import random
