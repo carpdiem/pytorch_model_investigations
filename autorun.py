@@ -108,10 +108,11 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
             # write a completed.txt file to the results directory
             with open(os.path.join(dirpath, 'completed.txt'), 'w') as f:
                 logging.info(f"Writing completion file for {model_name}")
-                f.write(f"Completed training for {model_name}")
-                f.write(f"Predicted duration was: {predicted_duration} seconds")
-                f.write(f"Actual Duration was: {time.time() - start_time} seconds")
-                f.write(f"Number of Epochs run: {num_epochs}")
+                f.write(f"Completed training for {model_name}\n")
+                f.write(f"Predicted duration was: {predicted_duration} seconds\n")
+                f.write(f"Actual Duration was: {time.time() - start_time} seconds\n")
+                f.write(f"Number of Epochs run: {num_epochs}\n")
+                f.write(f"Final accuracy: {res['accuracies'][-1]}\n")
 
             logging.info(f"All training activities complete for {model_name}")
         else:
