@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_ELU
+Predicted duration was: 14398.405909538269 seconds
+Actual Duration was: 9405.85374712944 seconds
+Number of Epochs run: 2025
+Final accuracy: 0.97225

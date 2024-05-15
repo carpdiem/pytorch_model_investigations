@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_SiLU
+Predicted duration was: 14395.574524641037 seconds
+Actual Duration was: 10145.231301546097 seconds
+Number of Epochs run: 2183
+Final accuracy: 0.975

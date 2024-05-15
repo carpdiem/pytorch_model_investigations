@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_ReLU
+Predicted duration was: 14396.284392595291 seconds
+Actual Duration was: 10821.44540143013 seconds
+Number of Epochs run: 2347
+Final accuracy: 0.978375

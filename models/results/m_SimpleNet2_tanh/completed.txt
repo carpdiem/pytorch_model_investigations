@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_tanh
+Predicted duration was: 14394.13948059082 seconds
+Actual Duration was: 10426.43610215187 seconds
+Number of Epochs run: 2280
+Final accuracy: 0.977125

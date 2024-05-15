@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_PReLU
+Predicted duration was: 14395.546071767807 seconds
+Actual Duration was: 9210.742336034775 seconds
+Number of Epochs run: 2007
+Final accuracy: 0.97825

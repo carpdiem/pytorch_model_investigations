@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_sigmoid
+Predicted duration was: 14394.913277626038 seconds
+Actual Duration was: 10487.466212034225 seconds
+Number of Epochs run: 2290
+Final accuracy: 0.955375

@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet
+Predicted duration was: 14397.312401771545 seconds
+Actual Duration was: 10555.568348407745 seconds
+Number of Epochs run: 2371
+Final accuracy: 0.923875

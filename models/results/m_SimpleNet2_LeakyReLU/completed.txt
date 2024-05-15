@@ -1,0 +1,5 @@
+Completed training for m_SimpleNet2_LeakyReLU
+Predicted duration was: 14394.500457763672 seconds
+Actual Duration was: 9953.792715549469 seconds
+Number of Epochs run: 2176
+Final accuracy: 0.9775
