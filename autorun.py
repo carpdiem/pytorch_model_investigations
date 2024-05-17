@@ -12,6 +12,18 @@ import logging
 import torch
 logger = logging.getLogger(__name__)
 
+def get_best_device():
+    if torch.cuda.is_available():
+        device = 'cuda'
+        logging.info("CUDA is available. Using GPU.")
+    elif torch.backends.mps.is_available():
+        device = 'mps'
+        logging.info("MPS is available. Using MPS.")
+    else:
+        device = 'cpu'
+        logging.info("CUDA and MPS are unavailable. Using CPU.")
+    return device
+
 def get_model_paths_from_dir(path, prefix='m_', suffix='.py'):
     file_list = os.listdir(path)
 
@@ -64,17 +76,19 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
     model_name = os.path.splitext(model_file)[0]
     os.sys.path.append(model_dir)
 
+    device = get_best_device()
+
     try:
         logging.info(f"Importing model {model_name}")
         model_module = importlib.import_module(model_name)
 
         if hasattr(model_module, 'DeepNet'):
-            model = model_module.DeepNet()
+            model = model_module.DeepNet().to(device)
             logging.info(f"Model {model_name} initialized successfully.")
             
             # determine time for one epoch
             start_time = time.time()
-            utils.loss_vs_flops(model, epochs=1)
+            utils.loss_vs_flops(model, epochs=1, device=device)
             epoch_time = time.time() - start_time
             logging.info(f"Time for one epoch: ~{epoch_time} seconds")
 
@@ -88,8 +102,8 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
             # train the model
             logging.info(f"Beginning Training for {model_name}")
             start_time = time.time()
-            model = model_module.DeepNet()
-            res = utils.loss_vs_flops(model, epochs=num_epochs)
+            model = model_module.DeepNet().to(device)
+            res = utils.loss_vs_flops(model, epochs=num_epochs, device=device)
             logging.info(f"Training completed for {model_name} in {time.time() - start_time} seconds")
 
             # create the results directory

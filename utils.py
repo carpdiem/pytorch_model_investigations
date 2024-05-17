@@ -27,11 +27,11 @@ def setup_mnist_datasets():
 
     return mnist
 
-def setup_mnist_dataloaders(batch_size = 100):
+def setup_mnist_dataloaders(batch_size = 100, device = 'cpu'):
     mnist = setup_mnist_datasets()
-    train_loader = DataLoader(mnist["train"], batch_size=batch_size, shuffle=True)
-    valid_loader = DataLoader(mnist["valid"], batch_size=batch_size, shuffle=False)
-    test_loader = DataLoader(mnist["test"], batch_size=batch_size, shuffle=False)
+    train_loader = DataLoader(mnist["train"], batch_size=batch_size, shuffle=True, pin_memory=(device != 'cpu'))
+    valid_loader = DataLoader(mnist["valid"], batch_size=batch_size, shuffle=False, pin_memory=(device != 'cpu'))
+    test_loader = DataLoader(mnist["test"], batch_size=batch_size, shuffle=False, pin_memory=(device != 'cpu'))
     return {'train': train_loader, 'valid': valid_loader, 'test': test_loader}
 
 
@@ -200,7 +200,7 @@ def loss_vs_flops(model, batch_size = 100,
     if seed is not False:
         set_seed(seed, deterministic=deterministic)
 
-    mnist_dls = setup_mnist_dataloaders(batch_size = batch_size)
+    mnist_dls = setup_mnist_dataloaders(batch_size = batch_size, device=device)
     
     ## first profile a single batch to determine flops / batch
     profile = profile_training_batch(mnist_dls['train'], mnist_dls['valid'], model,
@@ -233,7 +233,7 @@ def loss_vs_flops(model, batch_size = 100,
     accuracies = []
     for epoch in range(epochs):
         print(f"Epoch: {epoch + 1}")
-        training_loop(mnist_dls['train'], mnist_dls['valid'], model, loss_fn, optimizer)
+        training_loop(mnist_dls['train'], mnist_dls['valid'], model, loss_fn, optimizer, device=device)
         test_res = test(mnist_dls['valid'], model, loss_fn)
         losses += [test_res['loss']]
         accuracies += [test_res['accuracy']]
