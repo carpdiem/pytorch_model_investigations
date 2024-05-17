@@ -1,0 +1,5 @@
+Completed training for m_LeNet5_ReLU
+Predicted duration was: 14393.548317432404 seconds
+Actual Duration was: 11535.519489049911 seconds
+Number of Epochs run: 1686
+Final accuracy: 0.99075

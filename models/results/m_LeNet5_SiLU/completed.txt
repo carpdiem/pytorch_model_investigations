@@ -1,0 +1,5 @@
+Completed training for m_LeNet5_SiLU
+Predicted duration was: 14393.623722076416 seconds
+Actual Duration was: 10496.709919929504 seconds
+Number of Epochs run: 1636
+Final accuracy: 0.986125

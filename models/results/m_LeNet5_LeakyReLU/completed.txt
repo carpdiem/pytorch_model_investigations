@@ -1,0 +1,5 @@
+Completed training for m_LeNet5_LeakyReLU
+Predicted duration was: 14399.406816959381 seconds
+Actual Duration was: 11301.891903400421 seconds
+Number of Epochs run: 1591
+Final accuracy: 0.984625
