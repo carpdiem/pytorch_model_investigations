@@ -78,7 +78,7 @@ def simple_graph(results, show=True, path=None):
         plt.show()
 
 
-def try_me():
-    model_names = get_model_names_with_prefix('models/results', 'm_SimpleNet2')
+def try_me(model_prefix = 'm_SimpleNet2'):
+    model_names = get_model_names_with_prefix('models/results', model_prefix)
     results = load_training_results(*model_names)
     simple_graph(results)
