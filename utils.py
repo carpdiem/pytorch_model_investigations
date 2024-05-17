@@ -234,12 +234,12 @@ def loss_vs_flops(model, batch_size = 100,
     for epoch in range(epochs):
         print(f"Epoch: {epoch + 1}")
         training_loop(mnist_dls['train'], mnist_dls['valid'], model, loss_fn, optimizer, device=device)
-        test_res = test(mnist_dls['valid'], model, loss_fn)
+        test_res = test(mnist_dls['valid'], model, loss_fn, device=device)
         losses += [test_res['loss']]
         accuracies += [test_res['accuracy']]
         print(f"Validation Loss: {losses[-1]}")
 
-    print(f"\nFinal Test Loss: {test(mnist_dls['test'], model, loss_fn)}")
+    print(f"\nFinal Test Loss: {test(mnist_dls['test'], model, loss_fn, device=device)}")
 
     flops = [flops_per_epoch * (epoch + 1) for epoch in range(epochs)]
 
