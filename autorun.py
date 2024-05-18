@@ -11,6 +11,7 @@ import importlib
 import logging
 import torch
 from torch import nn
+import subprocess
 logger = logging.getLogger(__name__)
 
 def get_best_device():
@@ -129,6 +130,9 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
                 f.write(f"Actual Duration was: {time.time() - start_time} seconds\n")
                 f.write(f"Number of Epochs run: {num_epochs}\n")
                 f.write(f"Final accuracy: {res['accuracies'][-1]}\n")
+                f.write(f"Training device: {device}\n")
+                f.write(f"Training completed on {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}\n")
+                f.write(f"Git hash of training code: {subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('utf-8').strip()}\n")
 
             logging.info(f"All training activities complete for {model_name}")
         else:
