@@ -10,6 +10,7 @@ import time
 import importlib
 import logging
 import torch
+from torch import nn
 logger = logging.getLogger(__name__)
 
 def get_best_device():
@@ -87,8 +88,9 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
             logging.info(f"Model {model_name} initialized successfully.")
             
             # determine time for one epoch
+            mnist_dls = utils.setup_mnist_dataloaders(batch_size = 100, device=device)
             start_time = time.time()
-            utils.loss_vs_flops(model, epochs=1, device=device)
+            utils.training_loop(mnist_dls['train'], mnist_dls['valid'], model, nn.CrossEntropyLoss(), torch.optim.SGD, device=device)
             epoch_time = time.time() - start_time
             logging.info(f"Time for one epoch: ~{epoch_time} seconds")
 
