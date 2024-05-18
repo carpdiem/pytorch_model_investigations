@@ -79,6 +79,7 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
     os.sys.path.append(model_dir)
 
     device = get_best_device()
+    logging.info(f"Selected device: {device}")
 
     try:
         logging.info(f"Importing model {model_name}")
