@@ -1,5 +1,8 @@
 Completed training for m_LeNet5_SiLU
-Predicted duration was: 14393.623722076416 seconds
-Actual Duration was: 10496.709919929504 seconds
-Number of Epochs run: 1636
-Final accuracy: 0.986125
+Predicted duration was: 14397.238748073578 seconds
+Actual Duration was: 15488.489618301392 seconds
+Number of Epochs run: 3090
+Final accuracy: 0.981875
+Training device: cuda
+Training completed on 2024-05-19 11:03:20
+Git hash of training code: a9be92af53d99b5262365c493f10880666b0af9f

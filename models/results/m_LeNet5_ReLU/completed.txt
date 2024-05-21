@@ -1,5 +1,8 @@
 Completed training for m_LeNet5_ReLU
-Predicted duration was: 14393.548317432404 seconds
-Actual Duration was: 11535.519489049911 seconds
-Number of Epochs run: 1686
-Final accuracy: 0.99075
+Predicted duration was: 14399.288430452347 seconds
+Actual Duration was: 16350.794808864594 seconds
+Number of Epochs run: 3253
+Final accuracy: 0.9895
+Training device: cuda
+Training completed on 2024-05-19 20:10:41
+Git hash of training code: a9be92af53d99b5262365c493f10880666b0af9f

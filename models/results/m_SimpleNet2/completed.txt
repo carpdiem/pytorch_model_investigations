@@ -1,5 +1,8 @@
 Completed training for m_SimpleNet2
-Predicted duration was: 14399.99660539627 seconds
-Actual Duration was: 10053.969908952713 seconds
-Number of Epochs run: 2178
-Final accuracy: 0.925
+Predicted duration was: 14398.477973222733 seconds
+Actual Duration was: 15515.243920326233 seconds
+Number of Epochs run: 3443
+Final accuracy: 0.926625
+Training device: cuda
+Training completed on 2024-05-20 18:10:53
+Git hash of training code: a9be92af53d99b5262365c493f10880666b0af9f
