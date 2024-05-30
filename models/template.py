@@ -4,9 +4,18 @@ import torch.nn as nn
 # standard params
 #   'random_seed'
 #   'learning_rate'
-#   'optimizer'
+#   'batch size' 
 #   'loss function'
-#   something about... regularization?
+#   'train/validation split percentage'
+#   'normalize yes/no'
+#   'mixed precision yes/no'
+#   'momentum'
+#   'weight decay'
+#   'dampening'
+#   'beta'
+#   'epsilon'
+#   'learning rate scheduler function' https://docs.fast.ai/callback.schedule.html
+ 
 params = {}
 
 class DeepNet(nn.Module):
