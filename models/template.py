@@ -6,14 +6,15 @@ import torch.nn as nn
 #   'learning_rate'
 #   'batch size' 
 #   'loss function'
-#   'train/validation split percentage'
 #   'normalize yes/no'
+#   'regularize'
 #   'mixed precision yes/no'
 #   'momentum'
 #   'weight decay'
 #   'dampening'
 #   'beta'
 #   'epsilon'
+#   'prebuilt optimizer'
 #   'learning rate scheduler function' https://docs.fast.ai/callback.schedule.html
  
 params = {}
