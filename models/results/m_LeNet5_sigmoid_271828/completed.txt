@@ -1,0 +1,9 @@
+Completed training for m_LeNet5_sigmoid_271828
+Predicted duration was: 14398.066766738892 seconds
+Actual Duration was: 16808.90587067604 seconds
+Number of Epochs run: 3426
+Final accuracy: 0.956625
+Training device: cuda
+Training completed on 2024-05-29 19:08:47
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 271828

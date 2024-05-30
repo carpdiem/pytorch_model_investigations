@@ -1,0 +1,9 @@
+Completed training for m_SimpleNet2_PReLU_314159
+Predicted duration was: 14398.838139533997 seconds
+Actual Duration was: 16503.434740304947 seconds
+Number of Epochs run: 3634
+Final accuracy: 0.97575
+Training device: cuda
+Training completed on 2024-05-24 17:09:16
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 314159

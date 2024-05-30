@@ -1,0 +1,9 @@
+Completed training for m_SimpleNet2_tanh_271828
+Predicted duration was: 14396.841175079346 seconds
+Actual Duration was: 15927.397495746613 seconds
+Number of Epochs run: 3568
+Final accuracy: 0.976875
+Training device: cuda
+Training completed on 2024-05-28 20:31:19
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 271828

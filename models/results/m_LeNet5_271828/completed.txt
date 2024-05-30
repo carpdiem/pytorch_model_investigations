@@ -1,0 +1,9 @@
+Completed training for m_LeNet5_271828
+Predicted duration was: 14399.025268554688 seconds
+Actual Duration was: 16194.937137842178 seconds
+Number of Epochs run: 3310
+Final accuracy: 0.9895
+Training device: cuda
+Training completed on 2024-05-29 01:01:20
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 271828

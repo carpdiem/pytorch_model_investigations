@@ -1,0 +1,9 @@
+Completed training for m_LeNet5_LeakyReLU_314159
+Predicted duration was: 14398.081435203552 seconds
+Actual Duration was: 16189.95562672615 seconds
+Number of Epochs run: 3286
+Final accuracy: 0.98375
+Training device: cuda
+Training completed on 2024-05-23 23:29:20
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 314159

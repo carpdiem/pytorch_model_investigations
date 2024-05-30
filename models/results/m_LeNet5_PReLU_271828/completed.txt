@@ -1,0 +1,9 @@
+Completed training for m_LeNet5_PReLU_271828
+Predicted duration was: 14397.890694618225 seconds
+Actual Duration was: 16482.417397260666 seconds
+Number of Epochs run: 3298
+Final accuracy: 0.982125
+Training device: cuda
+Training completed on 2024-05-29 05:36:09
+Git hash of training code: 37ea4b4af15cdca42e2f59969cd42c8b4afc3730
+Random seed: 271828
