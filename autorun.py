@@ -73,7 +73,8 @@ def already_running():
     
     return False
 
-def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
+def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60, seed=1729):
+    utils.set_seed(seed)
     model_dir, model_file = os.path.split(model_path)
     model_name = os.path.splitext(model_file)[0]
     os.sys.path.append(model_dir)
@@ -107,7 +108,8 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
             logging.info(f"Beginning Training for {model_name}")
             start_time = time.time()
             model = model_module.DeepNet().to(device)
-            res = utils.loss_vs_flops(model, epochs=num_epochs, device=device)
+            logging.info(f"Training with random seed: {seed}")
+            res = utils.loss_vs_flops(model, epochs=num_epochs, device=device, seed=seed)
             logging.info(f"Training completed for {model_name} in {time.time() - start_time} seconds")
 
             # create the results directory
@@ -134,6 +136,7 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
                 f.write(f"Training device: {device}\n")
                 f.write(f"Training completed on {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}\n")
                 f.write(f"Git hash of training code: {subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('utf-8').strip()}\n")
+                f.write(f"Random seed: {seed}\n")
 
             logging.info(f"All training activities complete for {model_name}")
         else:
@@ -144,7 +147,7 @@ def load_model_and_train(model_path, time_allotted_seconds = 4 * 60 * 60):
 
     os.sys.path.remove(model_dir)
 
-def main(time_allotted_seconds = 4 * 60 * 60):
+def main(time_allotted_seconds = 4 * 60 * 60, seed=1729):
     logging.basicConfig(filename='autorun.log',
                         filemode='a',
                         level=logging.INFO,
@@ -158,7 +161,7 @@ def main(time_allotted_seconds = 4 * 60 * 60):
         logging.info(f"Models to train: {model_paths_to_train}")
         for model_path in model_paths_to_train:
             logging.info(f"Training model {model_path}")
-            load_model_and_train(model_path, time_allotted_seconds=time_allotted_seconds)
+            load_model_and_train(model_path, time_allotted_seconds=time_allotted_seconds, seed=271828)
         logging.info("All models trained!")
         logging.info("exiting now")
     else:
@@ -168,6 +171,6 @@ def main(time_allotted_seconds = 4 * 60 * 60):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        main(time_allotted_seconds=int(sys.argv[1]))
+        main(time_allotted_seconds=int(sys.argv[1]), seed=271828)
     else:
         main()
