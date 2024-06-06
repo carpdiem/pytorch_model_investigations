@@ -161,7 +161,7 @@ def main(time_allotted_seconds = 4 * 60 * 60, seed=1729):
         logging.info(f"Models to train: {model_paths_to_train}")
         for model_path in model_paths_to_train:
             logging.info(f"Training model {model_path}")
-            load_model_and_train(model_path, time_allotted_seconds=time_allotted_seconds, seed=271828)
+            load_model_and_train(model_path, time_allotted_seconds=time_allotted_seconds, seed=1729)
         logging.info("All models trained!")
         logging.info("exiting now")
     else:
@@ -171,6 +171,6 @@ def main(time_allotted_seconds = 4 * 60 * 60, seed=1729):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        main(time_allotted_seconds=int(sys.argv[1]), seed=271828)
+        main(time_allotted_seconds=int(sys.argv[1]), seed=1729)
     else:
         main()
