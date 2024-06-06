@@ -1,0 +1,76 @@
+# Gruvbox-Dark matplotlib style
+# Remixed and built upon by Michael Woods
+# Hacked together by Emil Rivera-Thorsen
+# Based on Héloïse Stevance's blog post:
+#     https://www.hfstevance.com/blog/2019/7/22/matplotlib-style
+# and the gruvbox color scheme by Pavel Pertsev:
+#     https://github.com/morhetz/gruvbox
+# To check more avaialble customization options see:
+# https://matplotlib.org/tutorials/introductory/customizing.html
+
+text.color : ebdbb2   # Non-quoted hex code
+
+# FIGURE
+figure.facecolor : 1d2021
+figure.figsize  : 6.472, 4  # Adjust according to dpi and your software
+figure.dpi : 200  # I have a HiDPI laptop. You may want to change this.
+
+# AXES
+axes.titlesize : 12
+axes.labelsize : 10
+axes.edgecolor : ebdbb2
+axes.facecolor : 1d2021  
+axes.labelcolor : ebdbb2
+axes.linewidth : 0.5
+axes.spines.top : False
+axes.spines.right : False
+axes.spines.bottom : True
+axes.spines.left : True
+
+# FONTS
+# font.family : monospace
+# font.monospace : 'Iosevka Fixed'
+
+# GRID
+axes.grid : True
+grid.alpha : 0.93
+grid.color : 504945
+grid.linestyle : :
+grid.linewidth : 0.5
+
+## Alternative grid style:
+# grid.linestyle : -
+# grid.color : 282828
+# grid.linewidth : 1.
+
+# LEGEND
+legend.facecolor : 282828
+legend.edgecolor : 282828
+legend.fontsize : 8
+legend.labelcolor : ebdbb2
+legend.borderpad : 0.2
+
+# LINES
+axes.prop_cycle : cycler('color', ['83a598', 'fb4934', 'b8bb26', 'fabd2f', 'd3869b', 'fe8019', '8ec07c', '458588', 'cc241d', '98971a', 'd79921', 'b16276', 'd65d0e', '689d6a']) #hex colours quoted here for some reason
+lines.linewidth : 0.5
+lines.markeredgecolor : 'none'
+
+# SCATTER PLOT
+scatter.marker : .
+
+# TICKS
+xtick.top : False
+ytick.right : False
+
+xtick.labelsize : 9
+xtick.color : fbf1c7
+xtick.direction : out
+ytick.labelsize : 9
+ytick.color : fbf1c7
+ytick.direction : out
+
+
+# FIGURE OUTPUT 
+savefig.dpi : 300 # Minimum bitmap resolution required by most journals.
+
+
