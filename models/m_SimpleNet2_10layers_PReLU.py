@@ -6,8 +6,8 @@ class DeepNet(nn.Module):
         super().__init__()
         self.num_middle_layers = 10
         self.layer1 = nn.Linear(28*28, 10*10)
-        self.middle_layers = [nn.Linear(10*10, 10*10) for i in range(self.num_middle_layers)]
-        self.activations = [nn.PReLU(num_parameters=1) for i in range(self.num_middle_layers)]
+        self.middle_layers = nn.ModuleList([nn.Linear(10*10, 10*10) for i in range(self.num_middle_layers)])
+        self.activations = nn.ModuleList([nn.PReLU(num_parameters=1) for i in range(self.num_middle_layers)])
         self.layerLast = nn.Linear(10*10, 10)
         
 
