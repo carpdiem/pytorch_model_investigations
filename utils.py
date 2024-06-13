@@ -202,6 +202,15 @@ def loss_vs_flops(model, batch_size = 100,
 
     mnist_dls = setup_mnist_dataloaders(batch_size = batch_size, device=device)
     
+    def reset_model_parameters(model):
+        for layer in model.children():
+            if hasattr(layer, 'reset_parameters'):
+                layer.reset_parameters()
+            elif isinstance(layer, nn.Module):
+                reset_model_parameters(layer)
+    
+    reset_model_parameters(model)
+
     ## first profile a single batch to determine flops / batch
     profile = profile_training_batch(mnist_dls['train'], mnist_dls['valid'], model,
                                      loss_fn = loss_fn,
@@ -216,12 +225,6 @@ def loss_vs_flops(model, batch_size = 100,
 
     ## now generate a training record
     ### First, we need to reset the model parameters
-    def reset_model_parameters(model):
-        for layer in model.children():
-            if hasattr(layer, 'reset_parameters'):
-                layer.reset_parameters()
-            elif isinstance(layer, nn.Module):
-                reset_model_parameters(layer)
     
     reset_model_parameters(model)
 
