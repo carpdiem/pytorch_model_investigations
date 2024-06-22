@@ -1,0 +1,9 @@
+Completed training for m_SimpleNet2_4layers_ReLU
+Predicted duration was: 14396.157821655273 seconds
+Actual Duration was: 16231.115842580795 seconds
+Number of Epochs run: 3364
+Final accuracy: 0.963625
+Training device: cuda
+Training completed on 2024-06-18 14:29:39
+Git hash of training code: 36f548dac3a07e23dbe1ff5b84b4619e70387f03
+Random seed: 1729
