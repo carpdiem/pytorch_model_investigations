@@ -56,7 +56,9 @@ def simple_graph(results, show=True, path=None, filetype=None):
             
             ax.set_yscale('function', functions=(forward, inverse))
             #breakpoint()
-            for modelname, data in sorted(results.items()):
+
+            for modelname in sort_alphanumeric(results.keys()):
+                data = results[modelname]
                 ax.plot(data['FLOPs'], data['Accuracy'], label = modelname)
             
             plt.legend()
@@ -107,7 +109,7 @@ def simple_graph(results, show=True, path=None, filetype=None):
 
         styles = ['gruvbox-dark.mplstyle', 'gruvbox-light.mplstyle']
 
-        print(filenames)
+        # print(filenames)
         for style, filename in zip(styles, filenames):
             plot_it(style, filename)
             if filetype == 'svg':
@@ -116,30 +118,34 @@ def simple_graph(results, show=True, path=None, filetype=None):
     if show:
         plot_it('gruvbox-dark.mplstyle', '', only_show=True)
 
+
 def sort_alphanumeric(strings):
-    """Sorts a list of strings alphanumerically, treating embedded numbers numerically.
-
-    Args:
-        strings: A list of strings to be sorted.
-
-    Returns:
-        A new list containing the strings sorted alphanumerically.
+    """Sorts a list of strings alphanumerically, correctly handling
+    numeric segments, variable lengths, and prioritizes text parts.
     """
 
     def convert(text):
-        """Converts a string into a tuple of strings and numbers for sorting.
-
-        For example:
-            "foo20bar" -> ("foo", 20, "bar")
-            "foo2bar" -> ("foo", 2, "bar")
-            "foo19bar1" -> ("foo", 19, "bar", 1, "")
-        """
-        return tuple(int(c) if c.isdigit() else c for c in re.split('(\d+)', text))
+        """Converts a string into a nested tuple for accurate sorting."""
+        parts = text.split('_')
+        result = []
+        # print(parts)
+        for part in parts:
+            subparts = re.split(r'(\d+)', part)
+            filtered_subparts = [p for p in subparts if p != '']
+            # print(f"subparts: {filtered_subparts}")
+            for subpart in filtered_subparts:
+                if subpart.isdigit():
+                    result.append((1, int(subpart)))
+                else:
+                    result.append((0, subpart))  # Tuple for char comparison
+        # print(result)
+        return result
 
     return sorted(strings, key=convert)
 
 def try_me(pos_filters = ['m_SimpleNet2'], neg_filters = [], show=True, path=None, filetype=None):
     model_names = get_model_names_with_filters('models/results', pos_filters, neg_filters)
     model_names = sort_alphanumeric(model_names)
+    # print(model_names)
     results = load_training_results(*model_names)
     simple_graph(results, show=show, path=path, filetype=filetype)
