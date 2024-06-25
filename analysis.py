@@ -145,7 +145,7 @@ def sort_alphanumeric(strings):
 
 def try_me(pos_filters = ['m_SimpleNet2'], neg_filters = [], show=True, path=None, filetype=None):
     model_names = get_model_names_with_filters('models/results', pos_filters, neg_filters)
-    model_names = sort_alphanumeric(model_names)
+    # model_names = sort_alphanumeric(model_names)
     # print(model_names)
     results = load_training_results(*model_names)
     simple_graph(results, show=show, path=path, filetype=filetype)
