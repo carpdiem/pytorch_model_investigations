@@ -1,4 +1,4 @@
-
+import os
 import xml.etree.ElementTree as ET
 import random
 import string
@@ -56,8 +56,10 @@ def process_svg(svg_path):
                         child.set('id', bounding_g.get('id'))
                         child.set('class', 'plot_line')
                         break
-
-    tree.write('p_' + svg_path)
+    directory, filename = os.path.split(svg_path)
+    new_filename = 'p_' + filename
+    new_filepath = os.path.join(directory, new_filename)
+    tree.write(new_filepath)
 
 # Example usage
 # process_svg('example.svg')
