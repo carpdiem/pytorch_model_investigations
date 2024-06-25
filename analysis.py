@@ -4,6 +4,7 @@ from matplotlib.ticker import AutoMinorLocator
 from svg_processor import process_svg
 import numpy as np
 import os
+import re
 
 def get_model_names_with_filters(path, pos_filters, neg_filters = []):
     file_list = os.listdir(path)
@@ -106,16 +107,39 @@ def simple_graph(results, show=True, path=None, filetype=None):
 
         styles = ['gruvbox-dark.mplstyle', 'gruvbox-light.mplstyle']
 
+        print(filenames)
         for style, filename in zip(styles, filenames):
             plot_it(style, filename)
             if filetype == 'svg':
                 process_svg(filename)
     
     if show:
-        plot_it('gruvbox-dark.mplstyle', _, only_show=True)
+        plot_it('gruvbox-dark.mplstyle', '', only_show=True)
 
+def sort_alphanumeric(strings):
+    """Sorts a list of strings alphanumerically, treating embedded numbers numerically.
+
+    Args:
+        strings: A list of strings to be sorted.
+
+    Returns:
+        A new list containing the strings sorted alphanumerically.
+    """
+
+    def convert(text):
+        """Converts a string into a tuple of strings and numbers for sorting.
+
+        For example:
+            "foo20bar" -> ("foo", 20, "bar")
+            "foo2bar" -> ("foo", 2, "bar")
+            "foo19bar1" -> ("foo", 19, "bar", 1, "")
+        """
+        return tuple(int(c) if c.isdigit() else c for c in re.split('(\d+)', text))
+
+    return sorted(strings, key=convert)
 
 def try_me(pos_filters = ['m_SimpleNet2'], neg_filters = [], show=True, path=None, filetype=None):
     model_names = get_model_names_with_filters('models/results', pos_filters, neg_filters)
+    model_names = sort_alphanumeric(model_names)
     results = load_training_results(*model_names)
     simple_graph(results, show=show, path=path, filetype=filetype)
