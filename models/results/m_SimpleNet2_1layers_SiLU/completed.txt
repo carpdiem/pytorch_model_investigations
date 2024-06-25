@@ -1,9 +1,0 @@
-Completed training for m_SimpleNet2_1layers_SiLU
-Predicted duration was: 14399.387437820435 seconds
-Actual Duration was: 16823.493502378464 seconds
-Number of Epochs run: 3606
-Final accuracy: 0.973375
-Training device: cuda
-Training completed on 2024-06-11 22:14:22
-Git hash of training code: 2ceb0197090b889410cb752991a234f2ca5a3590
-Random seed: 1729

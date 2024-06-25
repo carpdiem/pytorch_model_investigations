@@ -3,3 +3,5 @@ woods_scratch.ipynb
 __pycache__/
 models/__pycache__/
 autorun.sh
+.DS_Store
+middle_layers/

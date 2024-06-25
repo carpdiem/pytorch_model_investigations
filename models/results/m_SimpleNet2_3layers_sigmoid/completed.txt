@@ -1,9 +1,0 @@
-Completed training for m_SimpleNet2_3layers_sigmoid
-Predicted duration was: 14396.922579288483 seconds
-Actual Duration was: 16073.139006137848 seconds
-Number of Epochs run: 3327
-Final accuracy: 0.96225
-Training device: cuda
-Training completed on 2024-06-14 01:17:31
-Git hash of training code: 2ceb0197090b889410cb752991a234f2ca5a3590
-Random seed: 1729

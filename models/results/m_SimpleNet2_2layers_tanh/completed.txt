@@ -1,9 +1,0 @@
-Completed training for m_SimpleNet2_2layers_tanh
-Predicted duration was: 14398.977235794067 seconds
-Actual Duration was: 15913.594164609909 seconds
-Number of Epochs run: 3444
-Final accuracy: 0.9765
-Training device: cuda
-Training completed on 2024-06-20 23:57:02
-Git hash of training code: 36f548dac3a07e23dbe1ff5b84b4619e70387f03
-Random seed: 1729
