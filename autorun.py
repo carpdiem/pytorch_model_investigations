@@ -159,9 +159,13 @@ def main(time_allotted_seconds = 4 * 60 * 60, seed=1729):
         completed_runs = get_completed_runs('models/results')
         model_paths_to_train = get_model_paths_to_train(model_paths, completed_runs)
         logging.info(f"Models to train: {model_paths_to_train}")
+        total_num_models = len(model_paths_to_train)
+        logging.info(f"Number of models to train: {total_num_models}")
+        model_counter = 1
         for model_path in model_paths_to_train:
-            logging.info(f"Training model {model_path}")
+            logging.info(f"Training model {model_path} -- ({model_counter} / {total_num_models})")
             load_model_and_train(model_path, time_allotted_seconds=time_allotted_seconds, seed=1729)
+            model_counter += 1
         logging.info("All models trained!")
         logging.info("exiting now")
     else:
