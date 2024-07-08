@@ -1,0 +1,9 @@
+Completed training for m_SimpleNet2_5layers_LeakyReLU
+Predicted duration was: 14396.998389005661 seconds
+Actual Duration was: 15807.946939229965 seconds
+Number of Epochs run: 3179
+Final accuracy: 0.933375
+Training device: cuda
+Training completed on 2024-06-26 23:53:45
+Git hash of training code: 035c7ca13bdbc12880b287c5476f47420c2abca2
+Random seed: 1729
